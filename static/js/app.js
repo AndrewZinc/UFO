@@ -1,8 +1,12 @@
 // from data.js
 const tableData = data;
 
+// get field references
+var listVar = d3.selectAll(".list-group-item");
+
 // get table references
 var tbody = d3.select("tbody");
+
 
 function buildTable(data) {
   // First, clear out any existing data
@@ -24,14 +28,23 @@ function buildTable(data) {
 }
 
 // 1. Create a variable to keep track of all the filters as an object.
-
+var filterObject = {dateFilter: "",
+              cityFilter: "",
+              stateFilter: "",
+              countryFilter: "",
+              shapeFilter: ""};
 
 // 3. Use this function to update the filters. 
 function updateFilters() {
-
+    console.log("Begin updateFilters");
     // 4a. Save the element that was changed as a variable.
 
+
     // 4b. Save the value that was changed as a variable.
+    changeVar = d3.event.target.value;
+    console.log("got new value for filter");
+
+    console.log(changeVar);
 
     // 4c. Save the id of the filter that was changed as a variable.
 
@@ -49,7 +62,7 @@ function updateFilters() {
   function filterTable() {
   
     // 8. Set the filtered data to the tableData.
-    
+    let filteredData = tableData;
   
     // 9. Loop through all of the filters and keep any data that
     // matches the filter values
@@ -60,7 +73,24 @@ function updateFilters() {
   }
   
   // 2. Attach an event to listen for changes to each filter
-  
+  listVar.on("change", updateFilters);
+  console.log("fired event listener");
   
   // Build the table when the page loads
   buildTable(tableData);
+
+
+
+  // function handleClick() {
+  //   // Get the datetime value from the filter
+  //   let date = d3.select("#datetime").property("value");
+  //   let filteredData = tableData;
+
+  //   // Check if a date was entered and filter the data using that date
+  //   if (date) {
+  //       filteredData = filteredData.filter(row => row.datetime === date);  
+  //   }
+
+  //   // Rebuild the table using filteredData (default data or filtered)
+  //   buildTable(filteredData);
+//}
