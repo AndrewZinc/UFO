@@ -47,8 +47,8 @@ function updateFilters() {
     console.log(changeVar);
 
     // 4c. Save the id of the filter that was changed as a variable.
-
-  
+    changeVarID = d3.event.target.id;
+    console.log(changeVarID);
     // 5. If a filter value was entered then add that filterId and value
     // to the filters list. Otherwise, clear that filter from the filters object.
  
