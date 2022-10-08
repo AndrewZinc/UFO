@@ -9,12 +9,10 @@ var tbody = d3.select("tbody");
 
 
 function buildTable(data) {
-  console.log("start buildTable");
-
-  // First, clear out any existing data
+  // Clear any existing data
   tbody.html("");
 
-  // Next, loop through each object in the data and append a row and cells for each value
+  // Loop through each object in the data and append a row and cells for each value
   data.forEach((dataRow) => {
     // Append a row to the table body
     let row = tbody.append("tr");
@@ -25,11 +23,11 @@ function buildTable(data) {
       cell.text(val);
     });
   });
-  console.log("end buildTable");
 }
 
 // Create a variable to keep track of all the filters as an object.
-var filterObject = {dateFilter: "",
+var filterObject = {filterElement: "",
+              dateFilter: "",
               cityFilter: "",
               stateFilter: "",
               countryFilter: "",
@@ -37,19 +35,17 @@ var filterObject = {dateFilter: "",
 
 // Use this function to update the filters. 
 function updateFilters() {
-    console.log("Begin updateFilters");
     
-      // Save the value that was changed as a variable.
-    changeVar = d3.event.target.value;
-    console.log("got new value for filter");
+    // Save the element that was changed as a variable.
+    filterObject.filterElement = d3.select(this);
 
-    console.log(changeVar);
+    // Save the value that was changed as a variable.
+    changeVar = d3.event.target.value;
 
     // Save the id of the filter that was changed as a variable.
     changeVarID = d3.event.target.id;
-    console.log(changeVarID);
-    // If a filter value was entered then add that filterId and value
-    // to the filters list. Otherwise, clear that filter from the filters object.
+
+    // Add or clear the user-entered filter data to/from the filters object.
     if (changeVarID == "dateFilter") {
       filterObject.dateFilter = changeVar;
     } else if (changeVarID == "cityFilter") {
@@ -66,54 +62,35 @@ function updateFilters() {
     filterTable();
   }
 
-  // Use this function to filter the table when data is entered.
+  // Use this function to filter the table when the user enters filter criteria.
   function filterTable() {
-    console.log("Begin filterTable");
+
     // Set the filtered data to the tableData.
     let filteredData = tableData;
   
-    // Loop through all of the filters and keep any data that matches the filter values
+    // Loop through all of the filters in the filterObject and keep any data that matches the filter values
     for (let key in filterObject) {
-      console.log("---- Printing key -----");
-      console.log(key);
-
       if (key == "dateFilter" && filterObject[key] !== "") {
-        console.log(" ~~~ Key = dateFilter");
-        console.log(filterObject[key]);
         filteredData = filteredData.filter(row => row.datetime === filterObject[key]);  
       } 
       if (key == "cityFilter" && filterObject[key] !== "") {
-        console.log(" ~~~ Key = cityFilter");
-        console.log(filterObject[key]);
         filteredData = filteredData.filter(row => row.city === filterObject[key]);  
       } 
       if (key == "stateFilter" && filterObject[key] !== "") {
-        console.log(" ~~~ Key = stateFilter");
-        console.log(filterObject[key]);
         filteredData = filteredData.filter(row => row.state === filterObject[key]);  
       } 
       if (key == "countryFilter" && filterObject[key] !== "") {
-        console.log(" ~~~ Key = countryFilter");
-        console.log(filterObject[key]);
         filteredData = filteredData.filter(row => row.country === filterObject[key]);  
       }
       if (key == "shapeFilter" && filterObject[key] !== "") {
-        console.log(" ~~~ Key = shapeFilter");
-        console.log(filterObject[key]);
         filteredData = filteredData.filter(row => row.shape === filterObject[key]);  
       }
     }
-    
-    console.log("++++ Printing filteredData +++++");
-    console.log(filteredData);
-    
-    // if (filteredData.length) {
-    //   buildTable(tableData);
-    // } else  {
-    // // Rebuild the table using the filtered data
-    // buildTable(filteredData);
-    // }
 
+    if (filteredData.length == 0) {
+      alert("There was no data that matched all of the filter values.");
+    }
+    // Completed processing for all the filters - call buildTable to present the data.
     buildTable(filteredData);
   }
   
