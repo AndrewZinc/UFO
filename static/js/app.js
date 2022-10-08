@@ -74,26 +74,38 @@ function updateFilters() {
   
     // Loop through all of the filters and keep any data that matches the filter values
     for (let key in filterObject) {
-      // if (key == "dateFilter") {
-      //   console.log(filterObject[key]);
-      //   filteredData = filteredData.filter(row => row.datetime === filterObject[key]);  
-      // }
-      // } else if (key == "cityFilter") {
-        if (key == "cityFilter") {
+      console.log("---- Printing key -----");
+      console.log(key);
+
+      if (key == "dateFilter" && filterObject[key] !== "") {
+        console.log(" ~~~ Key = dateFilter");
+        console.log(filterObject[key]);
+        filteredData = filteredData.filter(row => row.datetime === filterObject[key]);  
+      } 
+      if (key == "cityFilter" && filterObject[key] !== "") {
+        console.log(" ~~~ Key = cityFilter");
         console.log(filterObject[key]);
         filteredData = filteredData.filter(row => row.city === filterObject[key]);  
-        }
-      // } else if (key == "stateFilter") {
-      //   console.log(filterObject[key]);
-      //   filteredData = filteredData.filter(row => row.state === filterObject[key]);  
-      // } else if (key == "countryFilter") {
-      //   console.log(filterObject[key]);
-      //   filteredData = filteredData.filter(row => row.country === filterObject[key]);  
-      // } else if (key == "shapeFilter") {
-      //   console.log(filterObject[key]);
-      //   filteredData = filteredData.filter(row => row.shape === filterObject[key]);  
-      // }
+      } 
+      if (key == "stateFilter" && filterObject[key] !== "") {
+        console.log(" ~~~ Key = stateFilter");
+        console.log(filterObject[key]);
+        filteredData = filteredData.filter(row => row.state === filterObject[key]);  
+      } 
+      if (key == "countryFilter" && filterObject[key] !== "") {
+        console.log(" ~~~ Key = countryFilter");
+        console.log(filterObject[key]);
+        filteredData = filteredData.filter(row => row.country === filterObject[key]);  
+      }
+      if (key == "shapeFilter" && filterObject[key] !== "") {
+        console.log(" ~~~ Key = shapeFilter");
+        console.log(filterObject[key]);
+        filteredData = filteredData.filter(row => row.shape === filterObject[key]);  
+      }
     }
+    
+    console.log("++++ Printing filteredData +++++");
+    console.log(filteredData);
     
     // if (filteredData.length) {
     //   buildTable(tableData);
