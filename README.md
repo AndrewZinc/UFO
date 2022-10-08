@@ -11,7 +11,7 @@ Upon entering the web site, the user is presented with a table of sighting data 
 * Country
 * Shape
 
-![Unfiltered View](Resources/UFO Finder.png)
+![Unfiltered View](Resources/UFO_Finder.png)
 
 The user is free to enter any type of input into the fields, but "placeholder" values are always displayed to help guide the user input. 
 
