@@ -3,6 +3,12 @@
 ## Overview
 This project developed javascript-based filtering of UFO sighting data.  An initial website was created with date filtering of the sighting data.  This trial demonstrated the a great improvement in the user experience within the site, so it was decided to expand the filtering to cover additional criteria.
 
+## Technology
+This project included the following technologies:
+* Javascript - The programming language that enables the interactive elements of the website.  This included the logic to detect user input and filter the data for display.
+* HTML - The web presentation technology.
+
+	
 ## Filtering the UFO Sighting Data
 Upon entering the web site, the user is presented with a table of sighting data and five text-based filter fields:
 * Date
